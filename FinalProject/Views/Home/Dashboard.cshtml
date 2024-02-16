@@ -1,0 +1,123 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+
+        .idea-table {
+            margin-top: 20px;
+        }
+
+            .idea-table th, .idea-table td {
+                text-align: center;
+            }
+
+        .btn-view-ppt {
+            color: #fff;
+            background-color: #28a745;
+            border: 1px solid #218838;
+        }
+
+            .btn-view-ppt:hover {
+                background-color: #218838;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="dashboard-header">
+            <h2>Hackathon Dashboard</h2>
+            <p>Hackathon Name: Demo Hackathon</p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card bg-primary text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">Idea Submissions</h5>
+                        <p class="card-text">25</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-success text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">Teams Participating</h5>
+                        <p class="card-text">10</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-info text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Participants</h5>
+                        <p class="card-text">50</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="idea-table">
+            <h3>Idea Submissions</h3>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Team Code</th>
+                        <th>Team Name</th>
+                        <th>Idea Description</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 1; i <= 5; i++)
+                    {
+                        <tr>
+                            <td>TeamCode-@i</td>
+                            <td>TeamName-@i</td>
+                            <td>Idea description for Team-@i</td>
+                            <td>
+                                <button class="btn btn-view-ppt" onclick="viewPPT('TeamCode-@i')">View PPT</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+    function viewPPT(teamCode) {
+        // Implement logic to view PPT for the selected team code
+        alert('View PPT for Team Code: ' + teamCode);
+    }
+    </script>
+
+</body>
+</html>

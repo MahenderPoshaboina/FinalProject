@@ -1,0 +1,95 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Join Team</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .join-team-form {
+            background-color: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+            .join-team-form h2 {
+                color: #007bff;
+            }
+
+        .form-group label {
+            color: #495057;
+        }
+
+        .form-control {
+            border: 1px solid #ced4da;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: 1px solid #007bff;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border: 1px solid #0056b3;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="text-center">
+            <h2>Join Team</h2>
+        </div>
+
+        <div class="join-team-form">
+            <form>
+                <div class="form-group">
+                    <label for="teamCode">Team Code:</label>
+                    <input type="text" class="form-control" id="teamCode" placeholder="Enter team code" required>
+                </div>
+                <div class="form-group">
+                    <label for="participantName">Participant Name:</label>
+                    <input type="text" class="form-control" id="participantName" placeholder="Enter your name" required>
+                </div>
+                <button type="button" class="btn btn-success btn-block" onclick="joinTeam()">Join Team</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function joinTeam() {
+            var teamCode = document.getElementById('teamCode').value;
+            var participantName = document.getElementById('participantName').value;
+
+            if (teamCode && participantName) {
+                // You can add your logic here to handle joining the team (e.g., making an API request)
+                // For now, display a success alert
+                alert('Joined team successfully!');
+            } else {
+                alert('Please enter both team code and participant name.');
+            }
+        }
+    </script>
+
+</body>
+</html>

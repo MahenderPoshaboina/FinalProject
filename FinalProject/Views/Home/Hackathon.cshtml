@@ -1,0 +1,86 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hackathon Details</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+
+        .hackathon-poster {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .hackathon-details {
+            margin-top: 20px;
+        }
+
+        .action-buttons {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="text-center">
+            <img src="~/Content/hackathonpage.jpg" alt="Hackathon Poster" class="hackathon-poster">
+        </div>
+
+        <div class="hackathon-details">
+            <h2 class="text-center">Hackathon Details</h2>
+
+            <dl class="row">
+                <dt class="col-sm-3">Duration:</dt>
+                <dd class="col-sm-9">3 Days</dd>
+
+                <dt class="col-sm-3">Deadline:</dt>
+                <dd class="col-sm-9">April 30, 2024</dd>
+
+                <dt class="col-sm-3">Mode of Conduct:</dt>
+                <dd class="col-sm-9">Virtual</dd>
+
+                <dt class="col-sm-3">Cash Prize:</dt>
+                <dd class="col-sm-9">$10,000</dd>
+
+                <dt class="col-sm-3">Problem Statement:</dt>
+                <dd class="col-sm-9">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac suscipit augue, vel dapibus ex.
+                    Nulla facilisi. In hac habitasse platea dictumst. Integer auctor vitae libero vel facilisis.
+                </dd>
+            </dl>
+        </div>
+
+        <div class="text-center action-buttons">
+            <button class="btn btn-primary" onclick="createTeam()" asp-action="CreateTeam">Create Team</button>
+            <button class="btn btn-success" onclick="joinTeam()">Join Team</button>
+            <button class="btn btn-info" onclick="submitIdea()">Submit Idea</button>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function createTeam() {
+
+             window.location.href = '@Url.Action("CreateTeam", "Home")';
+        }
+
+        function joinTeam() {
+            window.location.href = '@Url.Action("JoinTeam", "Home")';
+        }
+
+        function submitIdea() {
+           window.location.href = '@Url.Action("IdeaSubmission", "Home")';
+        }
+    </script>
+
+</body>
+</html>
