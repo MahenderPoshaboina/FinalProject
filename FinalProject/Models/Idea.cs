@@ -14,10 +14,12 @@ namespace FinalProject.Models
     
     public partial class Idea
     {
-        public string TeamCode { get; set; }
-        public string TeamName { get; set; }
+        public int IdeaId { get; set; }
+        public Nullable<int> TeamCode { get; set; }
         public string IdeaTitle { get; set; }
         public string IdeaDescription { get; set; }
-        public byte[] IdeaPptFile { get; set; }
+        public byte[] IdeaPPT { get; set; }
+    
+        public virtual Team Team { get; set; }
     }
 }

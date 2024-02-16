@@ -12,23 +12,24 @@ namespace FinalProject.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class Team
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
+        public Team()
         {
-            this.Teams = new HashSet<Team>();
+            this.Ideas = new HashSet<Idea>();
+            this.Users = new HashSet<User>();
+            this.Users1 = new HashSet<User>();
         }
     
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string PhoneNumber { get; set; }
-        public Nullable<int> TeamCode { get; set; }
-        public string Password { get; set; }
+        public int TeamCode { get; set; }
+        public string TeamName { get; set; }
     
-        public virtual Team Team { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Team> Teams { get; set; }
+        public virtual ICollection<Idea> Ideas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User> Users { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User> Users1 { get; set; }
     }
 }

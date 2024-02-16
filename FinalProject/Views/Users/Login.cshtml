@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <title>Login Page</title>
@@ -36,11 +40,10 @@
             </div>
         </div>
     </div>
-
     <div class="container mt-3">
         <div class="row justify-content-center">
             <div class="col-md-6 text-center">
-                <p>Don't have an account? <a href="@Url.Action("Create", "Users")">Create one</a></p>
+                <p>Don't' have an account? <a href="@Url.Action("Create", "Users")">Create One</a></p>
             </div>
         </div>
     </div>

@@ -224,28 +224,17 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IdeasController.cs" />
+    <Compile Include="Controllers\TeamsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Idea.cs">
-      <DependentUpon>IdeasModel.tt</DependentUpon>
+      <DependentUpon>UserModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\IdeasModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>IdeasModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\IdeasModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>IdeasModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\IdeasModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>IdeasModel.edmx</DependentUpon>
+    <Compile Include="Models\Team.cs">
+      <DependentUpon>UserModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
       <DependentUpon>UserModel.tt</DependentUpon>
@@ -288,16 +277,6 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\IdeasModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>IdeasModel.edmx</DependentUpon>
-      <LastGenOutput>IdeasModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\IdeasModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>IdeasModel.edmx</DependentUpon>
-      <LastGenOutput>IdeasModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Models\UserModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>UserModel.edmx</DependentUpon>
@@ -321,13 +300,6 @@
     </EntityDeploy>
     <Content Include="Models\UserModel.edmx.diagram">
       <DependentUpon>UserModel.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="Models\IdeasModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>IdeasModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\IdeasModel.edmx.diagram">
-      <DependentUpon>IdeasModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -366,17 +338,21 @@
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
-    <Content Include="Views\Users\Login.cshtml" />
+    <Content Include="Views\Teams\Create.cshtml" />
+    <Content Include="Views\Teams\Delete.cshtml" />
+    <Content Include="Views\Teams\Details.cshtml" />
+    <Content Include="Views\Teams\Edit.cshtml" />
+    <Content Include="Views\Teams\Index.cshtml" />
     <Content Include="Views\Ideas\Create.cshtml" />
     <Content Include="Views\Ideas\Delete.cshtml" />
     <Content Include="Views\Ideas\Details.cshtml" />
     <Content Include="Views\Ideas\Edit.cshtml" />
     <Content Include="Views\Ideas\Index.cshtml" />
+    <Content Include="Views\Users\Login.cshtml" />
     <Content Include="Views\Ideas\IdeaSubmission.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Signup\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

@@ -4,8 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="58756e9ecfec44769065a8b4cb6e2486" Name="Diagram1">
-        <EntityTypeShape EntityType="UserDbModel.User" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="870075c2a3164d69a29f7ab7e3422345" Name="Diagram1" ZoomLevel="115">
+        <EntityTypeShape EntityType="UserDbModel.Idea" Width="1.5" PointX="6.125" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDbModel.Team" Width="1.5" PointX="3.125" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDbModel.User" Width="1.5" PointX="7.125" PointY="3.25" IsExpanded="true" />
+        <AssociationConnector Association="UserDbModel.FK__Ideas__TeamCode__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDbModel.FK_TeamCode" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDbModel.TeamParticipants" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

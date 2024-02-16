@@ -12,16 +12,17 @@ namespace FinalProject.Controllers
 {
     public class UsersController : Controller
     {
-        private UserDbEntities2 db = new UserDbEntities2();
+        private UserDbEntities3 db = new UserDbEntities3();
 
         // GET: Users
         public ActionResult Index()
         {
-            return View(db.Users.ToList());
+            var users = db.Users.Include(u => u.Team);
+            return View(users.ToList());
         }
 
         // GET: Users/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -38,6 +39,7 @@ namespace FinalProject.Controllers
         // GET: Users/Create
         public ActionResult Create()
         {
+            ViewBag.TeamCode = new SelectList(db.Teams, "TeamCode", "TeamName");
             return View();
         }
 
@@ -46,20 +48,21 @@ namespace FinalProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Name,Email,Password,PhoneNumber")] User user)
+        public ActionResult Create([Bind(Include = "Id,Name,Email,PhoneNumber,TeamCode,Password")] User user)
         {
             if (ModelState.IsValid)
             {
                 db.Users.Add(user);
                 db.SaveChanges();
-                return RedirectToAction("Login","Home");
+                return RedirectToAction("Login");
             }
 
+            ViewBag.TeamCode = new SelectList(db.Teams, "TeamCode", "TeamName", user.TeamCode);
             return View(user);
         }
 
         // GET: Users/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -70,6 +73,7 @@ namespace FinalProject.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.TeamCode = new SelectList(db.Teams, "TeamCode", "TeamName", user.TeamCode);
             return View(user);
         }
 
@@ -78,7 +82,7 @@ namespace FinalProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Name,Email,Password,PhoneNumber")] User user)
+        public ActionResult Edit([Bind(Include = "Id,Name,Email,PhoneNumber,TeamCode,Password")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -86,11 +90,12 @@ namespace FinalProject.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.TeamCode = new SelectList(db.Teams, "TeamCode", "TeamName", user.TeamCode);
             return View(user);
         }
 
         // GET: Users/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -107,7 +112,7 @@ namespace FinalProject.Controllers
         // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(int id)
         {
             User user = db.Users.Find(id);
             db.Users.Remove(user);
@@ -126,8 +131,9 @@ namespace FinalProject.Controllers
         [HttpGet]
         public ActionResult Login()
         {
-            return View(); // Assuming you have a corresponding Login.cshtml view.
+            return View();
         }
+
         [HttpPost]
         public ActionResult Login(string email, string password)
         {
@@ -140,11 +146,11 @@ namespace FinalProject.Controllers
             }
             else
             {
-                // Invalid credentials, show an error (you can handle this as needed)
+                // Invalid credentials, show an error
                 ViewBag.ErrorMessage = "Incorrect email or password. Please try again.";
                 return View();
             }
         }
+
     }
-    
 }

@@ -13,10 +13,10 @@ namespace FinalProject.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class UserDbEntities2 : DbContext
+    public partial class UserDbEntities3 : DbContext
     {
-        public UserDbEntities2()
-            : base("name=UserDbEntities2")
+        public UserDbEntities3()
+            : base("name=UserDbEntities3")
         {
         }
     
@@ -25,6 +25,8 @@ namespace FinalProject.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Idea> Ideas { get; set; }
+        public virtual DbSet<Team> Teams { get; set; }
         public virtual DbSet<User> Users { get; set; }
     }
 }

@@ -4,52 +4,241 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="UserDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="UserDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Ideas">
+          <Key>
+            <PropertyRef Name="IdeaId" />
+          </Key>
+          <Property Name="IdeaId" Type="int" Nullable="false" />
+          <Property Name="TeamCode" Type="int" />
+          <Property Name="IdeaTitle" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="PPT" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TeamParticipants">
+          <Key>
+            <PropertyRef Name="TeamCode" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="TeamCode" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Teams">
+          <Key>
+            <PropertyRef Name="TeamCode" />
+          </Key>
+          <Property Name="TeamCode" Type="int" Nullable="false" />
+          <Property Name="TeamName" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
         <EntityType Name="Users">
           <Key>
-            <PropertyRef Name="Email" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="255" />
-          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="15" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="TeamCode" Type="int" />
         </EntityType>
+        <Association Name="FK__Ideas__TeamCode__5FB337D6">
+          <End Role="Teams" Type="Self.Teams" Multiplicity="0..1" />
+          <End Role="Ideas" Type="Self.Ideas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teams">
+              <PropertyRef Name="TeamCode" />
+            </Principal>
+            <Dependent Role="Ideas">
+              <PropertyRef Name="TeamCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TeamParti__TeamC__628FA481">
+          <End Role="Teams" Type="Self.Teams" Multiplicity="1" />
+          <End Role="TeamParticipants" Type="Self.TeamParticipants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teams">
+              <PropertyRef Name="TeamCode" />
+            </Principal>
+            <Dependent Role="TeamParticipants">
+              <PropertyRef Name="TeamCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TeamParti__UserI__6383C8BA">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="TeamParticipants" Type="Self.TeamParticipants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TeamParticipants">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeamCode">
+          <End Role="Teams" Type="Self.Teams" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teams">
+              <PropertyRef Name="TeamCode" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="TeamCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="UserDbModelStoreContainer">
+          <EntitySet Name="Ideas" EntityType="Self.Ideas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TeamParticipants" EntityType="Self.TeamParticipants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teams" EntityType="Self.Teams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Ideas__TeamCode__5FB337D6" Association="Self.FK__Ideas__TeamCode__5FB337D6">
+            <End Role="Teams" EntitySet="Teams" />
+            <End Role="Ideas" EntitySet="Ideas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TeamParti__TeamC__628FA481" Association="Self.FK__TeamParti__TeamC__628FA481">
+            <End Role="Teams" EntitySet="Teams" />
+            <End Role="TeamParticipants" EntitySet="TeamParticipants" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TeamParti__UserI__6383C8BA" Association="Self.FK__TeamParti__UserI__6383C8BA">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="TeamParticipants" EntitySet="TeamParticipants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeamCode" Association="Self.FK_TeamCode">
+            <End Role="Teams" EntitySet="Teams" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="UserDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Idea">
+          <Key>
+            <PropertyRef Name="IdeaId" />
+          </Key>
+          <Property Name="IdeaId" Type="Int32" Nullable="false" />
+          <Property Name="TeamCode" Type="Int32" />
+          <Property Name="IdeaTitle" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdeaDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IdeaPPT" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Team" Relationship="Self.FK__Ideas__TeamCode__5FB337D6" FromRole="Ideas" ToRole="Teams" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="TeamCode" />
+          </Key>
+          <Property Name="TeamCode" Type="Int32" Nullable="false" />
+          <Property Name="TeamName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Ideas" Relationship="Self.FK__Ideas__TeamCode__5FB337D6" FromRole="Teams" ToRole="Ideas" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_TeamCode" FromRole="Teams" ToRole="Users" />
+          <NavigationProperty Name="Users1" Relationship="Self.TeamParticipants" FromRole="Teams" ToRole="Users" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
-            <PropertyRef Name="Email" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TeamCode" Type="Int32" />
+          <NavigationProperty Name="Team" Relationship="Self.FK_TeamCode" FromRole="Users" ToRole="Teams" />
+          <NavigationProperty Name="Teams" Relationship="Self.TeamParticipants" FromRole="Users" ToRole="Teams" />
+          <Property Name="Password" Type="String" />
         </EntityType>
-        <EntityContainer Name="UserDbEntities2" annotation:LazyLoadingEnabled="true">
+        <Association Name="FK__Ideas__TeamCode__5FB337D6">
+          <End Role="Teams" Type="Self.Team" Multiplicity="0..1" />
+          <End Role="Ideas" Type="Self.Idea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teams">
+              <PropertyRef Name="TeamCode" />
+            </Principal>
+            <Dependent Role="Ideas">
+              <PropertyRef Name="TeamCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeamCode">
+          <End Role="Teams" Type="Self.Team" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teams">
+              <PropertyRef Name="TeamCode" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="TeamCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TeamParticipants">
+          <End Role="Teams" Type="Self.Team" Multiplicity="*" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="UserDbEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Ideas" EntityType="Self.Idea" />
+          <EntitySet Name="Teams" EntityType="Self.Team" />
           <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK__Ideas__TeamCode__5FB337D6" Association="Self.FK__Ideas__TeamCode__5FB337D6">
+            <End Role="Teams" EntitySet="Teams" />
+            <End Role="Ideas" EntitySet="Ideas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeamCode" Association="Self.FK_TeamCode">
+            <End Role="Teams" EntitySet="Teams" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="TeamParticipants" Association="Self.TeamParticipants">
+            <End Role="Teams" EntitySet="Teams" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="UserDbModelStoreContainer" CdmEntityContainer="UserDbEntities2">
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="UserDbModel.User">
-              <MappingFragment StoreEntitySet="Users">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+        <EntityContainerMapping StorageEntityContainer="UserDbModelStoreContainer" CdmEntityContainer="UserDbEntities3">
+          <EntitySetMapping Name="Ideas">
+            <EntityTypeMapping TypeName="UserDbModel.Idea">
+              <MappingFragment StoreEntitySet="Ideas">
+                <ScalarProperty Name="IdeaId" ColumnName="IdeaId" />
+                <ScalarProperty Name="TeamCode" ColumnName="TeamCode" />
+                <ScalarProperty Name="IdeaTitle" ColumnName="IdeaTitle" />
+                <ScalarProperty Name="IdeaDescription" ColumnName="Description" />
+                <ScalarProperty Name="IdeaPPT" ColumnName="PPT" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Teams">
+            <EntityTypeMapping TypeName="UserDbModel.Team">
+              <MappingFragment StoreEntitySet="Teams">
+                <ScalarProperty Name="TeamCode" ColumnName="TeamCode" />
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="UserDbModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="TeamCode" ColumnName="TeamCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="TeamParticipants" TypeName="UserDbModel.TeamParticipants" StoreEntitySet="TeamParticipants">
+            <EndProperty Name="Teams">
+              <ScalarProperty Name="TeamCode" ColumnName="TeamCode" />
+            </EndProperty>
+            <EndProperty Name="Users">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

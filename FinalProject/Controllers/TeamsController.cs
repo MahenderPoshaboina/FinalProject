@@ -10,112 +10,107 @@ using FinalProject.Models;
 
 namespace FinalProject.Controllers
 {
-    public class IdeasController : Controller
+    public class TeamsController : Controller
     {
         private UserDbEntities3 db = new UserDbEntities3();
 
-        // GET: Ideas
+        // GET: Teams
         public ActionResult Index()
         {
-            var ideas = db.Ideas.Include(i => i.Team);
-            return View(ideas.ToList());
+            return View(db.Teams.ToList());
         }
 
-        // GET: Ideas/Details/5
+        // GET: Teams/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Idea idea = db.Ideas.Find(id);
-            if (idea == null)
+            Team team = db.Teams.Find(id);
+            if (team == null)
             {
                 return HttpNotFound();
             }
-            return View(idea);
+            return View(team);
         }
 
-        // GET: Ideas/Create
+        // GET: Teams/Create
         public ActionResult Create()
         {
-            ViewBag.TeamCode = new SelectList(db.Teams, "TeamCode", "TeamName");
             return View();
         }
 
-        // POST: Ideas/Create
+        // POST: Teams/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdeaId,TeamCode,IdeaTitle,Description,PPT")] Idea idea)
+        public ActionResult Create([Bind(Include = "TeamCode,TeamName")] Team team)
         {
             if (ModelState.IsValid)
             {
-                db.Ideas.Add(idea);
+                db.Teams.Add(team);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.TeamCode = new SelectList(db.Teams, "TeamCode", "TeamName", idea.TeamCode);
-            return View(idea);
+            return View(team);
         }
 
-        // GET: Ideas/Edit/5
+        // GET: Teams/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Idea idea = db.Ideas.Find(id);
-            if (idea == null)
+            Team team = db.Teams.Find(id);
+            if (team == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.TeamCode = new SelectList(db.Teams, "TeamCode", "TeamName", idea.TeamCode);
-            return View(idea);
+            return View(team);
         }
 
-        // POST: Ideas/Edit/5
+        // POST: Teams/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdeaId,TeamCode,IdeaTitle,Description,PPT")] Idea idea)
+        public ActionResult Edit([Bind(Include = "TeamCode,TeamName")] Team team)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(idea).State = EntityState.Modified;
+                db.Entry(team).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.TeamCode = new SelectList(db.Teams, "TeamCode", "TeamName", idea.TeamCode);
-            return View(idea);
+            return View(team);
         }
 
-        // GET: Ideas/Delete/5
+        // GET: Teams/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Idea idea = db.Ideas.Find(id);
-            if (idea == null)
+            Team team = db.Teams.Find(id);
+            if (team == null)
             {
                 return HttpNotFound();
             }
-            return View(idea);
+            return View(team);
         }
 
-        // POST: Ideas/Delete/5
+        // POST: Teams/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Idea idea = db.Ideas.Find(id);
-            db.Ideas.Remove(idea);
+            Team team = db.Teams.Find(id);
+            db.Teams.Remove(team);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -127,11 +122,6 @@ namespace FinalProject.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-        [HttpGet, ActionName("IdeaSubmission")]
-        public ActionResult IdeaSubmission()
-        {
-            return View();
         }
     }
 }
