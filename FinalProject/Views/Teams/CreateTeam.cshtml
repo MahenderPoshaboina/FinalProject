@@ -1,0 +1,84 @@
+﻿
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Team</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+
+        .copy-button {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="text-center">Create New Team</h2>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" action="@Url.Action("CreateTeam", "Teams")">
+                            <div class="form-group">
+                                <label for="leaderName">Team Leader Name:</label>
+                                <input type="text" class="form-control" id="leaderName" name="leaderName" placeholder="Enter team leader name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="teamName">Team Name:</label>
+                                <input type="text" class="form-control" id="teamName" name="teamName" placeholder="Enter team name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="teamCode">Team Code:</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="teamCode" name="teamCode" readonly>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary copy-button" type="button" onclick="copyTeamCode()">Copy</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-success btn-block" onclick="generateTeamCode()">Generate Team Code</button>
+                            <button type="button" class="btn btn-success btn-block">Create Team</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function generateRandomAlphanumeric(length) {
+            const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            let result = "";
+            for (let i = 0; i < length; i++) {
+                const randomIndex = Math.floor(Math.random() * charset.length);
+                result += charset.charAt(randomIndex);
+            }
+            return result;
+        }
+
+        function generateTeamCode() {
+            const teamCodeInput = document.getElementById('teamCode');
+            const randomCode = generateRandomAlphanumeric(6);
+            teamCodeInput.value = randomCode;
+        }
+
+        function copyTeamCode() {
+            const teamCodeInput = document.getElementById('teamCode');
+            teamCodeInput.select();
+            document.execCommand('copy');
+        }
+    </script>
+
+</body>
+</html>

@@ -123,5 +123,30 @@ namespace FinalProject.Controllers
             }
             base.Dispose(disposing);
         }
+        // ... (existing code)
+
+        // GET: Teams/CreateTeam
+        public ActionResult CreateTeam()
+        {
+            return View();
+        }
+
+        // POST: Teams/CreateTeam
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateTeam([Bind(Include = "TeamCode,TeamName")] Team team)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Teams.Add(team);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(team);
+        }
+
+        // ... (existing code)
+
     }
 }
