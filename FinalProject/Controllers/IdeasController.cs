@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FinalProject.Models;
+
+
 
 namespace FinalProject.Controllers
 {
@@ -37,7 +40,7 @@ namespace FinalProject.Controllers
         }
 
         // GET: Ideas/Create
-        public ActionResult Create()
+        public ActionResult IdeaSubmission()
         {
             ViewBag.TeamCode = new SelectList(db.Teams, "TeamCode", "TeamName");
             return View();
@@ -48,18 +51,30 @@ namespace FinalProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdeaId,TeamCode,IdeaTitle,Description,PPT")] Idea idea)
+        public ActionResult IdeaSubmission(Idea idea, HttpPostedFileBase ideaPPTFile)
         {
             if (ModelState.IsValid)
             {
+                // Handle file upload
+                if (ideaPPTFile != null && ideaPPTFile.ContentLength > 0)
+                {
+                    using (var ms = new MemoryStream())
+                    {
+                        ideaPPTFile.InputStream.CopyTo(ms);
+                        idea.IdeaPPT = ms.ToArray();
+                    }
+                }
+
                 db.Ideas.Add(idea);
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
             ViewBag.TeamCode = new SelectList(db.Teams, "TeamCode", "TeamName", idea.TeamCode);
             return View(idea);
         }
+
 
         // GET: Ideas/Edit/5
         public ActionResult Edit(int? id)
@@ -128,10 +143,6 @@ namespace FinalProject.Controllers
             }
             base.Dispose(disposing);
         }
-        [HttpGet, ActionName("IdeaSubmission")]
-        public ActionResult IdeaSubmission()
-        {
-            return View();
-        }
+        
     }
 }
