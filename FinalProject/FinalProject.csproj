@@ -257,6 +257,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\abc.png" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -274,6 +275,9 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\hackathonpage.jpg" />
+    <Content Include="Content\new.png" />
+    <Content Include="Content\newa.png" />
+    <Content Include="Content\xyz.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -301,6 +305,8 @@
     <Content Include="Models\UserModel.edmx.diagram">
       <DependentUpon>UserModel.edmx</DependentUpon>
     </Content>
+    <None Include="Content\abc.webp" />
+    <Content Include="Content\xyz.webp" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -344,13 +350,11 @@
     <Content Include="Views\Teams\Edit.cshtml" />
     <Content Include="Views\Teams\Index.cshtml" />
     <Content Include="Views\Ideas\Create.cshtml" />
-    <Content Include="Views\Ideas\Delete.cshtml" />
-    <Content Include="Views\Ideas\Details.cshtml" />
-    <Content Include="Views\Ideas\Edit.cshtml" />
     <Content Include="Views\Ideas\Index.cshtml" />
     <Content Include="Views\Users\Login.cshtml" />
     <Content Include="Views\Ideas\IdeaSubmission.cshtml" />
     <Content Include="Views\Teams\CreateTeam.cshtml" />
+    <Content Include="Views\Ideas\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

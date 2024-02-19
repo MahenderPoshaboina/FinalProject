@@ -24,6 +24,47 @@
         .action-buttons {
             margin-top: 20px;
         }
+        .instructions {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+        }
+
+        .hackathon-card {
+            margin-top: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out;
+            max-width: 500px; /* Adjust the maximum width of the card */
+        }
+
+            .hackathon-card:hover {
+                transform: scale(1.05);
+            }
+
+            .hackathon-card img {
+                width: 100%; /* Make the image fill the card */
+                height: auto;
+                max-height: 300px; /* Adjust the maximum height of the image */
+            }
+
+        .hackathon-section {
+            margin-top: 50px;
+        }
+
+            .hackathon-section h2 {
+                margin-bottom: 20px;
+            }
+
+        #map {
+            height: 300px;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -61,6 +102,96 @@
             <button class="btn btn-primary" onclick="createTeam()" asp-action="CreateTeam">Create Team</button>
             <button class="btn btn-success" onclick="joinTeam()">Join Team</button>
             <button class="btn btn-info" onclick="submitIdea()">Submit Idea</button>
+        </div>
+        <div class="instructions">
+            <h3 class="text-center">Instructions</h3>
+            <p>
+                Welcome to our hackathon platform! Here are some instructions on how to participate:
+                <ul>
+                    <li>Register for the hackathon.</li>
+                    <li>Form a team or join an existing one.</li>
+                    <li>Submit your innovative ideas and solutions.</li>
+                    <li>Participate in coding challenges and activities.</li>
+                    <li>Collaborate with fellow participants and mentors.</li>
+                </ul>
+                We wish you a successful and enjoyable hacking experience!
+            </p>
+        </div>
+
+        <!-- Upcoming Hackathons -->
+        <div class="hackathon-section">
+            <h2 class="text-center">Upcoming Hackathons</h2>
+            <div class="row">
+                <!-- Sample hackathon cards (repeat for each hackathon) -->
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="hackathon-card">
+                        <img src="~/Content/hackathonpage.jpg" alt="Upcoming Hackathon">
+                        <div class="card-body">
+                            <h5 class="card-title">Upcoming Hackathon Name </h5>
+                            <p class="card-text">Date: May 15, 2024</p>
+                            <p class="card-text">Location: Virtual</p>
+                            <a href="#" class="btn btn-success">Details</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="hackathon-card">
+                        <img src="~/Content/hackathonpage.jpg" alt="Upcoming Hackathon">
+                        <div class="card-body">
+                            <h5 class="card-title">Upcoming Hackathon Name </h5>
+                            <p class="card-text">Date: May 15, 2024</p>
+                            <p class="card-text">Location: Virtual</p>
+                            <a href="#" class="btn btn-success">Details</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="hackathon-card">
+                        <img src="~/Content/hackathonpage.jpg" alt="Upcoming Hackathon">
+                        <div class="card-body">
+                            <h5 class="card-title">Upcoming Hackathon Name </h5>
+                            <p class="card-text">Date: May 15, 2024</p>
+                            <p class="card-text">Location: Virtual</p>
+                            <a href="#" class="btn btn-success">Details</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="hackathon-card">
+                        <img src="~/Content/hackathonpage.jpg" alt="Upcoming Hackathon">
+                        <div class="card-body">
+                            <h5 class="card-title">Upcoming Hackathon Name </h5>
+                            <p class="card-text">Date: May 15, 2024</p>
+                            <p class="card-text">Location: Virtual</p>
+                            <a href="#" class="btn btn-success">Details</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Past Hackathons -->
+        <div class="hackathon-section">
+            <h2 class="text-center">Past Hackathons</h2>
+            <div class="row">
+                <!-- Sample hackathon cards (repeat for each hackathon) -->
+                @for (int i = 1; i <= 4; i++)
+                {
+                    <div class="col-md-6 col-lg-3">
+                        <div class="hackathon-card">
+                            <img src="~/Content/hackathonpage.jpg" alt="Past Hackathon">
+                            <div class="card-body">
+                                <h5 class="card-title">Past Hackathon Name @i</h5>
+                                <p class="card-text">Date: April 10, 2024</p>
+                                <p class="card-text">Location: Virtual</p>
+                                <a href="#" class="btn btn-success">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
         </div>
     </div>
 

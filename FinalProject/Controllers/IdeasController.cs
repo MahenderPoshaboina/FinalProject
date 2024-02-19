@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FinalProject.Models;
+using System.Data.Entity.Infrastructure;
 
 
 
@@ -18,25 +19,13 @@ namespace FinalProject.Controllers
         private UserDbEntities3 db = new UserDbEntities3();
 
         // GET: Ideas
-        public ActionResult Index()
-        {
-            var ideas = db.Ideas.Include(i => i.Team);
-            return View(ideas.ToList());
-        }
+     
 
         // GET: Ideas/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Idea idea = db.Ideas.Find(id);
-            if (idea == null)
-            {
-                return HttpNotFound();
-            }
-            return View(idea);
+            var ideas = db.Ideas.ToList();
+            return View("Details", ideas);
         }
 
         // GET: Ideas/Create
@@ -47,93 +36,50 @@ namespace FinalProject.Controllers
         }
 
         // POST: Ideas/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult IdeaSubmission(Idea idea, HttpPostedFileBase ideaPPTFile)
+        public ActionResult IdeaSubmission(Idea idea)
         {
-            if (ModelState.IsValid)
+            try
             {
-                // Handle file upload
-                if (ideaPPTFile != null && ideaPPTFile.ContentLength > 0)
+                if (ModelState.IsValid)
                 {
-                    using (var ms = new MemoryStream())
-                    {
-                        ideaPPTFile.InputStream.CopyTo(ms);
-                        idea.IdeaPPT = ms.ToArray();
-                    }
+                    db.Ideas.Add(idea);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
                 }
 
+                // If ModelState is not valid, return the view with errors
+                ViewBag.Error = "Model state is not valid.";
                 db.Ideas.Add(idea);
                 db.SaveChanges();
-
-                return RedirectToAction("Index");
+                return View(idea);
             }
+            catch (DbUpdateException ex)
+            {
+                // Handle or log the exception
+                Exception innerException = ex.InnerException;
 
-            ViewBag.TeamCode = new SelectList(db.Teams, "TeamCode", "TeamName", idea.TeamCode);
-            return View(idea);
+                while (innerException != null)
+                {
+                    // Log or inspect the inner exception
+                    innerException = innerException.InnerException;
+                }
+
+                ViewBag.Error = "An error occurred while saving the data.";
+                return View(idea);
+            }
+            catch (Exception ex)
+            {
+                // Handle or log other exceptions
+                ViewBag.Error = "An unexpected error occurred.";
+                return View(idea);
+            }
         }
 
 
-        // GET: Ideas/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Idea idea = db.Ideas.Find(id);
-            if (idea == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.TeamCode = new SelectList(db.Teams, "TeamCode", "TeamName", idea.TeamCode);
-            return View(idea);
-        }
 
-        // POST: Ideas/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdeaId,TeamCode,IdeaTitle,Description,PPT")] Idea idea)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(idea).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.TeamCode = new SelectList(db.Teams, "TeamCode", "TeamName", idea.TeamCode);
-            return View(idea);
-        }
 
-        // GET: Ideas/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Idea idea = db.Ideas.Find(id);
-            if (idea == null)
-            {
-                return HttpNotFound();
-            }
-            return View(idea);
-        }
-
-        // POST: Ideas/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Idea idea = db.Ideas.Find(id);
-            db.Ideas.Remove(idea);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        // ... (Your existing actions)
 
         protected override void Dispose(bool disposing)
         {
@@ -143,6 +89,5 @@ namespace FinalProject.Controllers
             }
             base.Dispose(disposing);
         }
-        
     }
 }

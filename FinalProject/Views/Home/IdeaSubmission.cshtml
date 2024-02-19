@@ -65,31 +65,33 @@
         </div>
 
         <div class="idea-submission-form">
-            <form asp-action="Create" asp-controller="Ideas">
+            <form id="ideaForm" asp-controller="Ideas" asp-action="IdeaSubmission" method="post">
+
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    <label for="ideaID">Idea ID:</label>
+                    <input type="text" name="IdeaId" class="form-control" id="teamCode" placeholder="Enter Idea ID" required>
+                </div>
                 <div class="form-group">
                     <label for="teamCode">Team Code:</label>
-                    <input type="text" class="form-control" id="teamCode" placeholder="Enter team code" required>
+                    <input type="text" name="TeamCode" class="form-control" id="teamCode" placeholder="Enter team code" required>
                 </div>
-                <div class="form-group">
-                    <label for="ideaTitle">Team Name:</label>
-                    <input type="text" class="form-control" id="ideaTitle" placeholder="Enter team name" required>
-                </div>
+
                 <div class="form-group">
                     <label for="ideaTitle">Idea Title:</label>
-                    <input type="text" class="form-control" id="ideaTitle" placeholder="Enter idea title" required>
+                    <input type="text" name="IdeaTitle" class="form-control" id="ideaTitle" placeholder="Enter idea title" required>
                 </div>
                 <div class="form-group">
                     <label for="ideaDescription">Idea Description:</label>
-                    <textarea class="form-control" id="ideaDescription" rows="4" placeholder="Enter idea description" required></textarea>
+                    <textarea class="form-control" name="IdeaDescription" id="ideaDescription" rows="8" placeholder="Enter idea description" required></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="ideaPPT">Upload Idea PPT:</label>
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="ideaPPT" accept=".ppt, .pptx" required>
-                        <label class="custom-file-label" for="ideaPPT">Choose file</label>
-                    </div>
+                    <label for="ideaPPT">Idea PPT Google Drive Link:</label>
+                    <input type="text" class="form-control" name="IdeaPPTLink" id="ideaPPTLink" placeholder="Enter Google Drive link" required>
                 </div>
-                <button type="button" class="btn btn-success btn-block" onclick="submitIdea()">Submit Idea</button>
+
+                <button type="submit" class="btn btn-success btn-block" id="submitBtn">Submit Idea</button>
+
             </form>
         </div>
     </div>
@@ -97,28 +99,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <script>
-    // Display selected file name in the file input field
-    $('.custom-file-input').on('change', function () {
-        var fileName = $(this).val().split('\\').pop();
-        $(this).next('.custom-file-label').html(fileName);
-    });
-
-    function submitIdea() {
-        var teamCode = document.getElementById('teamCode').value;
-        var ideaTitle = document.getElementById('ideaTitle').value;
-        var ideaDescription = document.getElementById('ideaDescription').value;
-        var ideaPPT = document.getElementById('ideaPPT').value;
-
-        if (teamCode && ideaTitle && ideaDescription && ideaPPT) {
-            // You can add your logic here to handle idea submission (e.g., making an API request)
-            // For now, display a success alert
-            alert('Idea submitted successfully!');
-        } else {
-            alert('Please fill in all required fields.');
-        }
-    }
-    </script>
 
 </body>
 </html>

@@ -65,8 +65,9 @@
         </div>
 
         <div class="idea-submission-form">
-            <form asp-controller="Ideas" asp-action="IdeaSubmission" method="post" enctype="multipart/form-data">
-                @Html.AntiForgeryToken()
+            <form method="post" asp-controller="Ideas" asp-action="IdeaSubmission" >
+
+            
                 <div class="form-group">
                     <label for="ideaID">Idea ID:</label>
                     <input type="text" name="IdeaId" class="form-control" id="teamCode" placeholder="Enter Idea ID" required>
@@ -82,16 +83,14 @@
                 </div>
                 <div class="form-group">
                     <label for="ideaDescription">Idea Description:</label>
-                    <textarea class="form-control" name="IdeaDescription" id="ideaDescription" rows="4" placeholder="Enter idea description" required></textarea>
+                    <input type="text" class="form-control" name="IdeaDescription" id="ideaDescription" rows="" placeholder="Enter idea description" required>
                 </div>
                 <div class="form-group">
-                    <label for="ideaPPT">Upload Idea PPT:</label>
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" name="IdeaPPT" id="ideaPPT" accept=".ppt, .pptx" required>
-                        <label class="custom-file-label" for="ideaPPT">Choose file</label>
-                    </div>
+                    <label for="ideaPPT">Idea PPT Google Drive Link:</label>
+                    <input type="text" class="form-control" name="IdeaPPTLink" id="ideaPPTLink" placeholder="Enter Google Drive link" required>
                 </div>
-                <button type="submit" class="btn btn-success btn-block">Submit Idea</button>
+
+                <button type="submit" class="btn btn-success btn-block" id="submitBtn">Submit Idea</button>
 
             </form>
         </div>
@@ -100,35 +99,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <script>
-    $(document).ready(function () {
-        // Display selected file name in the file input field
-        $('.custom-file-input').on('change', function () {
-            var fileName = $(this).val().split('\\').pop();
-            $(this).next('.custom-file-label').html(fileName);
-        });
-    });
-
-    function submitIdea(event) {
-    event.preventDefault(); // Prevent default form submission
-
-    var form = document.forms[0];
-    var formData = new FormData(form);
-
-    $.ajax({
-        url: '@Url.Action("IdeaSubmission", "Ideas")',
-        type: 'POST',
-        data: formData,
-        processData: false, // Important!
-        contentType: false, // Important!
-        success: function (data) {
-            alert('Idea submitted successfully!');
-        },
-        error: function (error) {
-            alert('Error submitting idea. Please try again.');
-        }
-    });
-}
-    </script>
+  
 </body>
 </html>

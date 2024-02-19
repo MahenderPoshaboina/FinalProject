@@ -1,33 +1,223 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
+﻿<!DOCTYPE html>
+<html lang="en">
 
-<main>
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Insight Software Hackathon</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: navy;
+            color: #ffffff;
+            padding: 1rem;
+            text-align: center;
+            margin-top:40px;
+        }
+
+        section {
+            padding: 3rem 0;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .cta-section {
+            background-color: #007bff;
+            color: #ffffff;
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+            .cta-section h2 {
+                font-size: 2.5rem;
+                margin-bottom: 2rem;
+            }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            text-decoration: none;
+            background-color: #ffffff;
+            color: #007bff;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+
+            .cta-btn:hover {
+                background-color: #0056b3;
+                color: #ffffff;
+            }
+
+        .feature-section {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .feature-box {
+            text-align: center;
+            margin: 1.5rem;
+            padding: 1.5rem;
+            background-color: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: #007bff;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-section {
+            background-color: #ffffff;
+            text-align: center;
+            padding: 4rem 0;
+            display:flex;
+            flex-direction:column;
+        }
+
+        .testimonial {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 1.5rem;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+            .testimonial img {
+                border-radius: 50%;
+                margin-bottom: 1rem;
+            }
+
+            .testimonial p {
+                font-style: italic;
+                color: #555555;
+            }
+
+        .login-section {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .login-btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            text-decoration: none;
+            background-color: #28a745;
+            color: #ffffff;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+
+            .login-btn:hover {
+                background-color: #218838;
+            }
+
+        footer {
+            background-color: #343a40;
+            color: #ffffff;
+            text-align: center;
+            padding: 1rem 0;
+            width:100%;
+        }
+        .img {
+            align-items: center;
+            margin-left:-300px;
+            height: 90%;
+            object-fit: cover;
+
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="img">
+        <img src="/Content/newa.png" alt="Company Logo" class="company-logo">
+    </div>
+    <header>
+        <h1>Company Insight Software Hackathon</h1>
+    </header>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Participate in our own hackathon!</h2>
+            <p>Showcase your skills, connect with talents, improve your skills, and develop projects.</p>
+            <a href="/Users/Login" class="cta-btn">Login Now to Participate</a>
+        </div>
     </section>
 
-    <div class="row">
-        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </section>
-    </div>
-</main>
+    <section class="feature-section">
+        <div class="container">
+            <div class="feature-box">
+                <i class="feature-icon fas fa-code"></i>
+                <h3 class="feature-title">Showcase Your Skills</h3>
+                <p>Display your coding prowess in our hackathon and stand out.</p>
+            </div>
+
+            <div class="feature-box">
+                <i class="feature-icon fas fa-users"></i>
+                <h3 class="feature-title">Connecting Talents</h3>
+                <p>Connect with like-minded individuals and form powerful teams.</p>
+            </div>
+
+            <div class="feature-box">
+                <i class="feature-icon fas fa-graduation-cap"></i>
+                <h3 class="feature-title">Improve Your Skills</h3>
+                <p>Learn and enhance your skills through challenging tasks and collaboration.</p>
+            </div>
+
+            <div class="feature-box">
+                <i class="feature-icon fas fa-laptop-code"></i>
+                <h3 class="feature-title">Develop Projects</h3>
+                <p>Bring your ideas to life by working on exciting projects during the hackathon.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonial-section">
+        <div class="container">
+            <div class="testimonial">
+                <img src="~/Content/xyz.png" alt="Testimonial Avatar">
+                <p>"The hackathon provided a fantastic platform to collaborate, innovate, and learn from the best. I highly recommend participating!"</p>
+                <p>- John Doe, Software Developer</p>
+            </div>
+           
+        </div>
+    </section>
+
+    <section class="login-section">
+        <a href="/Users/Login" class="login-btn">Login Now</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Company Insight Software. All rights reserved.</p>
+    </footer>
+
+</body>
+
+</html>

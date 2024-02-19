@@ -12,8 +12,8 @@
           <Property Name="IdeaId" Type="int" Nullable="false" />
           <Property Name="TeamCode" Type="int" />
           <Property Name="IdeaTitle" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="Description" Type="nvarchar(max)" />
-          <Property Name="PPT" Type="varbinary(max)" />
+          <Property Name="IdeaDescription" Type="nvarchar(max)" />
+          <Property Name="IdeaPPTLink" Type="varchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="TeamParticipants">
           <Key>
@@ -123,8 +123,8 @@
           <Property Name="TeamCode" Type="Int32" />
           <Property Name="IdeaTitle" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IdeaDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IdeaPPT" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Team" Relationship="Self.FK__Ideas__TeamCode__5FB337D6" FromRole="Ideas" ToRole="Teams" />
+          <Property Name="IdeaPPTLink" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Team">
           <Key>
@@ -147,11 +147,11 @@
           <Property Name="TeamCode" Type="Int32" />
           <NavigationProperty Name="Team" Relationship="Self.FK_TeamCode" FromRole="Users" ToRole="Teams" />
           <NavigationProperty Name="Teams" Relationship="Self.TeamParticipants" FromRole="Users" ToRole="Teams" />
-          <Property Name="Password" Type="String" />
+          <Property Name="Password" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
         </EntityType>
         <Association Name="FK__Ideas__TeamCode__5FB337D6">
           <End Role="Teams" Type="Self.Team" Multiplicity="0..1" />
-          <End Role="Ideas" Type="Self.Idea" Multiplicity="*" />
+          <End Role="Ideas" Type="UserDbModel.Idea" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Teams">
               <PropertyRef Name="TeamCode" />
@@ -178,7 +178,7 @@
           <End Role="Users" Type="Self.User" Multiplicity="*" />
         </Association>
         <EntityContainer Name="UserDbEntities3" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Ideas" EntityType="Self.Idea" />
+          <EntitySet Name="Ideas" EntityType="UserDbModel.Idea" />
           <EntitySet Name="Teams" EntityType="Self.Team" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <AssociationSet Name="FK__Ideas__TeamCode__5FB337D6" Association="Self.FK__Ideas__TeamCode__5FB337D6">
@@ -203,12 +203,12 @@
           <EntitySetMapping Name="Ideas">
             <EntityTypeMapping TypeName="UserDbModel.Idea">
               <MappingFragment StoreEntitySet="Ideas">
+                <ScalarProperty Name="IdeaDescription" ColumnName="IdeaDescription" />
+                <ScalarProperty Name="IdeaPPTLink" ColumnName="IdeaPPTLink" />
                 <ScalarProperty Name="IdeaId" ColumnName="IdeaId" />
                 <ScalarProperty Name="TeamCode" ColumnName="TeamCode" />
                 <ScalarProperty Name="IdeaTitle" ColumnName="IdeaTitle" />
-                <ScalarProperty Name="IdeaDescription" ColumnName="Description" />
-                <ScalarProperty Name="IdeaPPT" ColumnName="PPT" />
-              </MappingFragment>
+                </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Teams">

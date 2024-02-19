@@ -125,7 +125,7 @@ namespace FinalProject.Controllers
         }
         // ... (existing code)
 
-        [HttpGet, ActionName("CreateTeam")]
+        [HttpGet]
         public ActionResult CreateTeam()
         {
             return View();
@@ -133,18 +133,15 @@ namespace FinalProject.Controllers
 
 
         // POST: Teams/CreateTeam
-        [HttpPost, ActionName("CreateTeam")]
-        [ValidateAntiForgeryToken]
+        [HttpPost]
+
         public ActionResult CreateTeam([Bind(Include = "TeamCode,TeamName")] Team team)
         {
-            //if (ModelState.IsValid)
-            //{
+            
                 db.Teams.Add(team);
                 db.SaveChanges();
                 return RedirectToAction("Hackathon","Home");
-            //}
-
-            //return View(team);
+           
         }
 
         // ... (existing code)
