@@ -12,7 +12,7 @@ namespace FinalProject.Controllers
 {
     public class TeamsController : Controller
     {
-        private UserDbEntities3 db = new UserDbEntities3();
+        private UserDbEntities4 db = new UserDbEntities4();
 
         // GET: Teams
         public ActionResult Index()
@@ -137,11 +137,31 @@ namespace FinalProject.Controllers
 
         public ActionResult CreateTeam([Bind(Include = "TeamCode,TeamName")] Team team)
         {
-            
-                db.Teams.Add(team);
-                db.SaveChanges();
-                return RedirectToAction("Hackathon","Home");
-           
+            string email = Session["Email"] as string;
+            string password = Session["Password"] as string;
+
+            if (email != null && password != null)
+            {
+                string userEmail = email;
+                string userPassword = password;
+
+                var user = db.Users.FirstOrDefault(u => u.Email == userEmail && u.Password == userPassword);
+                if (user != null)
+                {
+                    
+                    db.Teams.Add(team);
+                    db.SaveChanges();
+
+                    // Update the TeamCode for the current user to Users table
+                    user.TeamCode = team.TeamCode;
+                    db.SaveChanges(); // save db changes
+
+                    return RedirectToAction("Hackathon", "Home");
+                }
+            }
+
+            // If the user is not logged in or their credentials do not match, redirect to the login page
+            return RedirectToAction("Login", "Users");
         }
 
         // ... (existing code)

@@ -1,0 +1,116 @@
+﻿
+@{
+    ViewBag.Title = "TeamParticipants";
+}
+
+<h2>TeamParticipants</h2>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Idea Submission</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .idea-submission-form {
+            background-color: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+            .idea-submission-form h2 {
+                color: #007bff;
+            }
+
+        .form-group label {
+            color: #495057;
+        }
+
+        .form-control {
+            border: 1px solid #ced4da;
+        }
+
+        .custom-file-label {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: 1px solid #007bff;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border: 1px solid #0056b3;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="text-center">
+            <h2>Team Participants</h2>
+        </div>
+    </div>
+    <div class="container">
+        @if (ViewBag.Message != null)
+        {
+            <div class="alert alert-info" role="alert">
+                @ViewBag.Message
+            </div>
+        }
+
+        @if (ViewBag.Teammates != null && ViewBag.Teammates.Count > 0)
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var teammate in ViewBag.Teammates)
+                    {
+                        <tr>
+                            <td>@teammate.Name</td>
+                            <td>@teammate.Email</td>
+                            <td>@teammate.PhoneNumber</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div class="alert alert-warning" role="alert">
+                You are not a member of any team or there are no teammates.
+            </div>
+        }
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>
+
+
+
+

@@ -4,6 +4,25 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
+    <style id="theme-light">
+        body {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        /* Add more light theme styles here */
+    </style>
+
+    <!-- Dark Theme Styles (Initially hidden) -->
+    <style id="theme-dark" disabled>
+        body {
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+
+        /* Add more dark theme styles here */
+    </style>
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -21,21 +40,38 @@
                     <li>@Html.ActionLink("Login", "Login", "Users", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Signup", "Create", "Users", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Dashboard", "Dashboard", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("IdeaSubmission","IdeaSubmission", "Ideas", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("IdeaSubmission", "IdeaSubmission", "Ideas", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Hackathon", "Hackathon", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    
+                    <li>@Html.ActionLink("TeamParticipants", "TeamParticipants", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li><button type="button" onclick="toggleTheme()">Change Theme</button></li>
                 </ul>
             </div>
         </div>
     </nav>
+    <script>
+        function toggleTheme() {
+            var lightTheme = document.getElementById('theme-light');
+            var darkTheme = document.getElementById('theme-dark');
+
+            if (lightTheme.disabled) {
+                lightTheme.disabled = false;
+                darkTheme.disabled = true;
+            } else {
+                lightTheme.disabled = true;
+                darkTheme.disabled = false;
+            }
+        }
+    </script>
     <div class="container body-content">
         @RenderBody()
         <hr />
-        
     </div>
 
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/bootstrap") <!-- Include Bootstrap JavaScript after jQuery -->
     @RenderSection("scripts", required: false)
+
+    <!-- Theme Switcher Script -->
+
 </body>
 </html>

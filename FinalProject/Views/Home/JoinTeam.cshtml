@@ -72,24 +72,37 @@
             </form>
         </div>
     </div>
+    <script>
+    function joinTeam() {
+        var teamCode = document.getElementById('teamCode').value;
+        var participantName = document.getElementById('participantName').value;
+
+        if (teamCode && !isNaN(teamCode) && participantName) {
+            $.ajax({
+                url: '@Url.Action("JoinTeam", "Home")',
+                type: 'POST',
+                data: { teamCode: teamCode, participantName: participantName },
+                success: function (response) {
+                    if (response.success) {
+                        alert(response.message);
+                        window.location.reload(); // Reload the page after successful join
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function () {
+                    alert('An error occurred while joining the team.');
+                }
+            });
+        } else {
+            alert('Please enter a valid team code and participant name.');
+        }
+    }
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <script>
-        function joinTeam() {
-            var teamCode = document.getElementById('teamCode').value;
-            var participantName = document.getElementById('participantName').value;
-
-            if (teamCode && participantName) {
-                // You can add your logic here to handle joining the team (e.g., making an API request)
-                // For now, display a success alert
-                alert('Joined team successfully!');
-            } else {
-                alert('Please enter both team code and participant name.');
-            }
-        }
-    </script>
 
 </body>
 </html>

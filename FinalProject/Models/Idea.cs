@@ -18,7 +18,7 @@ namespace FinalProject.Models
         public Nullable<int> TeamCode { get; set; }
         public string IdeaTitle { get; set; }
         public string IdeaDescription { get; set; }
-        public string IdeaPPTLink { get; set; }
+        public byte[] IdeaPPT { get; set; }
     
         public virtual Team Team { get; set; }
     }

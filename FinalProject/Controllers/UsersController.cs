@@ -12,7 +12,7 @@ namespace FinalProject.Controllers
 {
     public class UsersController : Controller
     {
-        private UserDbEntities3 db = new UserDbEntities3();
+        private UserDbEntities4 db = new UserDbEntities4();
 
         // GET: Users
         public ActionResult Index()
@@ -141,7 +141,9 @@ namespace FinalProject.Controllers
 
             if (user != null)
             {
-                // Credentials are valid, redirect to the dashboard
+                // Credentials are valid, save the email in the session
+                Session["Email"] = email;
+                Session["Password"] = password;
                 return RedirectToAction("Dashboard", "Home");
             }
             else
@@ -150,6 +152,13 @@ namespace FinalProject.Controllers
                 ViewBag.ErrorMessage = "Incorrect email or password. Please try again.";
                 return View();
             }
+        }
+
+        [HttpPost]
+        public JsonResult CheckEmailExists(string email)
+        {
+            var user = db.Users.FirstOrDefault(u => u.Email == email);
+            return Json(new { exists = user != null });
         }
 
     }

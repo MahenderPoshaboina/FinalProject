@@ -13,10 +13,10 @@ namespace FinalProject.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class UserDbEntities3 : DbContext
+    public partial class UserDbEntities4 : DbContext
     {
-        public UserDbEntities3()
-            : base("name=UserDbEntities3")
+        public UserDbEntities4()
+            : base("name=UserDbEntities4")
         {
         }
     

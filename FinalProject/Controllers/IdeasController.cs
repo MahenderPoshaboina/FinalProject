@@ -16,7 +16,7 @@ namespace FinalProject.Controllers
 {
     public class IdeasController : Controller
     {
-        private UserDbEntities3 db = new UserDbEntities3();
+        private UserDbEntities4 db = new UserDbEntities4();
 
         // GET: Ideas
      
